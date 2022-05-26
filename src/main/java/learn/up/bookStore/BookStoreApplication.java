@@ -2,13 +2,12 @@ package learn.up.bookStore;
 
 import learn.up.bookStore.dao.Book;
 import learn.up.bookStore.dao.BookDao;
+import learn.up.bookStore.dao.OrderDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import java.util.Optional;
 
 @SpringBootApplication
 public class BookStoreApplication {
@@ -19,17 +18,37 @@ public class BookStoreApplication {
 
 		ConfigurableApplicationContext context = SpringApplication.run(BookStoreApplication.class, args);
 
-		System.out.println("Hello world!");
-		BookDao bean = context.getBean(BookDao.class);
-		Optional<Book> war = bean.findById(1);
-		log.info("{}", war);
-		Book newBook = Book.builder()
-				.book("Ебланы")
-				.author("Хуесос")
-				.price(20000)
+		BookDao book = context.getBean(BookDao.class);
+		OrderDao order = context.getBean(OrderDao.class);
+		Book book1 = Book.builder()
+				.name("Война и мудаки")
+				.price(2000)
+				.author_id(2)
 				.build();
-		bean.save(newBook);
-		log.info("{}", bean.findById(2));
+		Book book2 = Book.builder()
+				.name("Война и мудаки")
+				.price(2000)
+				.author_id(2)
+				.build();
+		Book book3 = Book.builder()
+				.name("Война и мудаки")
+				.price(2000)
+				.author_id(2)
+				.build();
+		Book book4 = Book.builder()
+				.name("Война и мудаки")
+				.price(2000)
+				.author_id(2)
+				.build();
+
+		order.putBookInBusket(book1);
+		order.putBookInBusket(book2);
+		order.putBookInBusket(book3);
+		order.putBookInBusket(book4);
+
+		order.lookInBusket();
+
+		order.buyBusket();
 
 	}
 

@@ -8,12 +8,12 @@ import java.util.Optional;
 
 @Repository
 public class BookDao {
-
     private static final String FIND_BY_ID = "select * from books.books where id = :id";
 
-    private static final String SAVE = "" +
-            "insert into books.books (book, author, price) " +
-            "values(:book, :author, :price)";
+    private static final String SAVE = "insert into books.books (name, price, author_id) " +
+            "values(:name, :price, :author_id)";
+
+    private static final String DELETE = "delete from books.books customer WHERE id = :id";
 
     private final NamedParameterJdbcTemplate template;
 
@@ -25,9 +25,9 @@ public class BookDao {
         template.update(
                 SAVE,
                 new MapSqlParameterSource()
-                        .addValue("book", book.getBook())
-                        .addValue("author", book.getAuthor())
+                        .addValue("name", book.getName())
                         .addValue("price", book.getPrice())
+                        .addValue("author_id", book.getAuthor_id())
         );
     }
 
@@ -37,12 +37,16 @@ public class BookDao {
                         new MapSqlParameterSource("id", id),
                         (rs, rn) -> Book.builder()
                                 .id(rs.getLong("id"))
-                                .book(rs.getString("book"))
-                                .author(rs.getString("author"))
+                                .name(rs.getString("name"))
                                 .price(rs.getInt("price"))
+                                .author_id(rs.getInt("author_id"))
                                 .build()
                 ).stream()
                 .findAny();
     }
 
+    public void delete(Book book) {
+        long id = book.getAuthor_id();
+        template.update(DELETE, new MapSqlParameterSource("id", id));
+    }
 }

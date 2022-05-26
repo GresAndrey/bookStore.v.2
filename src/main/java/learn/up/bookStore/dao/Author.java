@@ -5,9 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Book {
-    private Long id;
+public class Author {
+    private long id;
     private String name;
-    private int author_id;
-    private int price;
+    private String sureName;
 }
