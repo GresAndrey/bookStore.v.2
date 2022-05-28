@@ -4,18 +4,18 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "order")
+@Entity(name = "orders")
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
-public class Order {
+public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
+    @JoinColumn
     private Client client;
 
     @Column

@@ -15,7 +15,7 @@ public class BookStoreApplication {
 
 		ConfigurableApplicationContext context = SpringApplication.run(BookStoreApplication.class, args);
 
-
+		System.out.println("Hello world!");
 	}
 
 }

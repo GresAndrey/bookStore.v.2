@@ -16,6 +16,7 @@ public class BookWarehouse {
     private Long id;
 
     @OneToOne
+    @JoinColumn
     private Book book;
 
     @Column

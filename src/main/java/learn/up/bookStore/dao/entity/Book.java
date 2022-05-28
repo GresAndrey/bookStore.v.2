@@ -38,15 +38,4 @@ public class Book {
     @JoinColumn
     @Fetch(FetchMode.JOIN)
     private Author author;
-
-    @OneToOne(optional = false)
-    private BookWarehouse bookWarehouse;
-
-    public BookWarehouse getBookWarehouse() {
-        return bookWarehouse;
-    }
-
-    public void setBookWarehouse(BookWarehouse bookWarehouse) {
-        this.bookWarehouse = bookWarehouse;
-    }
 }
